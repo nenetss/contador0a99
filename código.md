@@ -1,10 +1,7 @@
 ###contador0a99
 contador de 0 a 99 usando ESP32 em mikropython com o display de 7 segmentos
 
-#Importar as bibliotecas de definições do pinos e biblioteca do tempo
-
-
-from *machine* import Pin
+from machine import Pin
 from time import sleep
 
 #Definir a função de cada pino que for usado
@@ -25,8 +22,29 @@ sensor    = Pin(35, Pin.IN)
 
 #Inicializar as variáveis
 
-contador = 0    # Contador de peças (0 até 9)
-contador2 = 0
+def unidade(num):
+  segmentoA.value(digito[num][7])
+  segmentoB.value(digito[num][6])
+  segmentoC.value(digito[num][5])
+  segmentoD.value(digito[num][4])
+  segmentoE.value(digito[num][3])
+  segmentoF.value(digito[num][2])
+  segmentoG.value(digito[num][1])
+
+def dezena(num2):
+  segmentoA.value(digito[num2][7])
+  segmentoB.value(digito[num2][6])
+  segmentoC.value(digito[num2][5])
+  segmentoD.value(digito[num2][4])
+  segmentoE.value(digito[num2][3])
+  segmentoF.value(digito[num2][2])
+  segmentoG.value(digito[num2][1])
+
+
+
+
+contador = 0   
+
 
 digito = [[0,0,1,1,1,1,1,1],  # Número 0 
          [0,0,0,0,0,1,1,0],           # Número 1
@@ -54,32 +72,25 @@ while(True):
   elif(zerar.value() == 0):
     contador = 0
     
-  segmentoA.value(digito[quociente][7])
-  segmentoB.value(digito[quociente][6])
-  segmentoC.value(digito[quociente][5])
-  segmentoD.value(digito[quociente][4])
-  segmentoE.value(digito[quociente][3])
-  segmentoF.value(digito[quociente][2])
-  segmentoG.value(digito[quociente][1])
+  display1.value(1)
+  display2.value(1)
+
+  unidade(quociente)
+
   display2.value(0)
   sleep(0.01)
-  display1.value(1)
-  sleep(0.01)
-  display2.value(1)
-  segmentoA.value(digito[resto][7])
-  segmentoB.value(digito[resto][6])
-  segmentoC.value(digito[resto][5])
-  segmentoD.value(digito[resto][4])
-  segmentoE.value(digito[resto][3])
-  segmentoF.value(digito[resto][2])
-  segmentoG.value(digito[resto][1])
-  display1.value(0)
-  sleep(0.01)
-  display1.value(1)
 
+  display2.value(1)
+ 
+  dezena(resto)
+  display1.value(0)
   
+ 
 
   quociente = contador % 10
   resto = contador // 10
+  
+  
+  https://wokwi.com/projects/330186173403103826
 
 
